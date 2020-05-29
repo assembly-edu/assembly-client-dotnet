@@ -1,6 +1,6 @@
 /**
  * Assembly Developer API .NET Client
- * SDK Version 2.2.463
+ * SDK Version 2.2.464
  * API Version 1.1.0
  *
  * Support
@@ -78,17 +78,47 @@ namespace AssemblyClient
     /// Returns a list of students who have left the school
     /// </remarks>
     /// <param name="ifModifiedSince">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
+    /// <param name="date">Filter by a specific date, used as the &#x60;start_date&#x60; and &#x60;end_date&#x60; where applicable (optional)</param>
+    /// <param name="demographics">Include demographics data (optional)</param>
+    /// <param name="contacts">Include contacts data (optional)</param>
+    /// <param name="senNeeds">Include SEN needs data (optional)</param>
+    /// <param name="emails">Include email addresses (optional)</param>
+    /// <param name="addresses">Include address data (optional)</param>
+    /// <param name="care">Include student care data (you must also supply the demographics parameter) (optional)</param>
+    /// <param name="everInCare">Include whether the student has ever been in care (you must also supply the demographics parameter) (optional)</param>
+    /// <param name="languages">Include student language data (optional)</param>
+    /// <param name="photo">Include student photo data (optional)</param>
     /// <param name="perPage">Number of results to return (optional, default to 100)</param>
     /// <param name="page">Page number to return (optional, default to 1)</param>
     /// <returns>List&lt;Student&gt;</returns>
     public async Task<List<Student>> Left(
       DateTime? ifModifiedSince = null, 
+      DateTime? date = null, 
+      bool? demographics = null, 
+      bool? contacts = null, 
+      bool? senNeeds = null, 
+      bool? emails = null, 
+      bool? addresses = null, 
+      bool? care = null, 
+      bool? everInCare = null, 
+      bool? languages = null, 
+      bool? photo = null, 
       int? perPage = null, 
       int? page = null
     )
     {
       dynamic args = new ExpandoObject();
       args.ifModifiedSince = ifModifiedSince;
+      args.date = date;
+      args.demographics = demographics;
+      args.contacts = contacts;
+      args.senNeeds = senNeeds;
+      args.emails = emails;
+      args.addresses = addresses;
+      args.care = care;
+      args.everInCare = everInCare;
+      args.languages = languages;
+      args.photo = photo;
       args.perPage = perPage;
       args.page = page;
       var results = await Client.GetList<Student>($"/students/left", args);
@@ -102,6 +132,7 @@ namespace AssemblyClient
     /// Returns a list of students for the school associated with the provided &#x60;access_token&#x60;
     /// </remarks>
     /// <param name="ifModifiedSince">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
+    /// <param name="ifNoneMatch">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
     /// <param name="students">ID(s) of the student(s) as an Integer. Multiple IDs can be separated with a space (so a + URL encoded) (optional)</param>
     /// <param name="date">Filter by a specific date, used as the &#x60;start_date&#x60; and &#x60;end_date&#x60; where applicable (optional)</param>
     /// <param name="yearCode">Filter by school year (optional)</param>
@@ -119,6 +150,7 @@ namespace AssemblyClient
     /// <returns>List&lt;Student&gt;</returns>
     public async Task<List<Student>> List(
       DateTime? ifModifiedSince = null, 
+      string ifNoneMatch = null, 
       List<int?> students = null, 
       DateTime? date = null, 
       string yearCode = null, 
@@ -137,6 +169,7 @@ namespace AssemblyClient
     {
       dynamic args = new ExpandoObject();
       args.ifModifiedSince = ifModifiedSince;
+      args.ifNoneMatch = ifNoneMatch;
       args.students = students;
       args.date = date;
       args.yearCode = yearCode;

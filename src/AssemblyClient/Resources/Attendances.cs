@@ -1,6 +1,6 @@
 /**
  * Assembly Developer API .NET Client
- * SDK Version 2.2.463
+ * SDK Version 2.2.464
  * API Version 1.1.0
  *
  * Support
@@ -34,6 +34,7 @@ namespace AssemblyClient
     /// Returns a list of attendances. By default, attendances are returned from the start to the end of the current week
     /// </remarks>
     /// <param name="ifModifiedSince">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
+    /// <param name="ifNoneMatch">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
     /// <param name="studentId">Filter to the specified student (optional)</param>
     /// <param name="registrationGroupId">ID of a registration group (optional)</param>
     /// <param name="groupId">Filter to the specified group (optional)</param>
@@ -44,6 +45,7 @@ namespace AssemblyClient
     /// <returns>List&lt;Attendance&gt;</returns>
     public async Task<List<Attendance>> List(
       DateTime? ifModifiedSince = null, 
+      string ifNoneMatch = null, 
       int? studentId = null, 
       int? registrationGroupId = null, 
       int? groupId = null, 
@@ -55,6 +57,7 @@ namespace AssemblyClient
     {
       dynamic args = new ExpandoObject();
       args.ifModifiedSince = ifModifiedSince;
+      args.ifNoneMatch = ifNoneMatch;
       args.studentId = studentId;
       args.registrationGroupId = registrationGroupId;
       args.groupId = groupId;
@@ -73,6 +76,7 @@ namespace AssemblyClient
     /// Returns a list of attendance summaries
     /// </remarks>
     /// <param name="ifModifiedSince">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
+    /// <param name="ifNoneMatch">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
     /// <param name="studentId">Filter to the specified student (optional)</param>
     /// <param name="registrationGroupId">ID of a registration group (optional)</param>
     /// <param name="groupId">Filter to the specified group (optional)</param>
@@ -82,6 +86,7 @@ namespace AssemblyClient
     /// <returns>List&lt;AttendanceSummary&gt;</returns>
     public async Task<List<AttendanceSummary>> Summaries(
       DateTime? ifModifiedSince = null, 
+      string ifNoneMatch = null, 
       int? studentId = null, 
       int? registrationGroupId = null, 
       int? groupId = null, 
@@ -92,6 +97,7 @@ namespace AssemblyClient
     {
       dynamic args = new ExpandoObject();
       args.ifModifiedSince = ifModifiedSince;
+      args.ifNoneMatch = ifNoneMatch;
       args.studentId = studentId;
       args.registrationGroupId = registrationGroupId;
       args.groupId = groupId;

@@ -1,6 +1,6 @@
 /**
  * Assembly Developer API .NET Client
- * SDK Version 2.2.463
+ * SDK Version 2.2.464
  * API Version 1.1.0
  *
  * Support
@@ -60,6 +60,7 @@ namespace AssemblyClient
     /// Returns a list of staff members who have left the school
     /// </remarks>
     /// <param name="ifModifiedSince">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
+    /// <param name="ifNoneMatch">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
     /// <param name="teachersOnly">Filter to staff who are teachers (optional)</param>
     /// <param name="addresses">Include address data (optional)</param>
     /// <param name="demographics">Include demographics data (optional)</param>
@@ -69,6 +70,7 @@ namespace AssemblyClient
     /// <returns>List&lt;StaffMember&gt;</returns>
     public async Task<List<StaffMember>> Left(
       DateTime? ifModifiedSince = null, 
+      string ifNoneMatch = null, 
       bool? teachersOnly = null, 
       bool? addresses = null, 
       bool? demographics = null, 
@@ -79,6 +81,7 @@ namespace AssemblyClient
     {
       dynamic args = new ExpandoObject();
       args.ifModifiedSince = ifModifiedSince;
+      args.ifNoneMatch = ifNoneMatch;
       args.teachersOnly = teachersOnly;
       args.addresses = addresses;
       args.demographics = demographics;
@@ -96,6 +99,7 @@ namespace AssemblyClient
     /// Returns a list of staff members for the school accociated with the provided &#x60;access_token&#x60;
     /// </remarks>
     /// <param name="ifModifiedSince">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
+    /// <param name="ifNoneMatch">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
     /// <param name="teachersOnly">Filter to staff who are teachers (optional)</param>
     /// <param name="addresses">Include address data (optional)</param>
     /// <param name="demographics">Include demographics data (optional)</param>
@@ -105,6 +109,7 @@ namespace AssemblyClient
     /// <returns>List&lt;StaffMember&gt;</returns>
     public async Task<List<StaffMember>> List(
       DateTime? ifModifiedSince = null, 
+      string ifNoneMatch = null, 
       bool? teachersOnly = null, 
       bool? addresses = null, 
       bool? demographics = null, 
@@ -115,6 +120,7 @@ namespace AssemblyClient
     {
       dynamic args = new ExpandoObject();
       args.ifModifiedSince = ifModifiedSince;
+      args.ifNoneMatch = ifNoneMatch;
       args.teachersOnly = teachersOnly;
       args.addresses = addresses;
       args.demographics = demographics;

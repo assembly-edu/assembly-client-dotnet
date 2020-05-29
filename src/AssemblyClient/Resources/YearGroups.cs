@@ -1,6 +1,6 @@
 /**
  * Assembly Developer API .NET Client
- * SDK Version 2.2.463
+ * SDK Version 2.2.464
  * API Version 1.1.0
  *
  * Support
@@ -54,6 +54,7 @@ namespace AssemblyClient
     /// Returns a list of year groups that match the given set of filters.  If a date parameter is provided then the list of groups returned is filtered to only those where the provided date falls between the groups &#x60;start_date&#x60; and &#x60;end_date&#x60;. Additionally when a date parameter is provided &#x60;student_ids&#x60; and &#x60;supervior_ids&#x60; are restricted to only those students who were enrolled in the group on the given date. 
     /// </remarks>
     /// <param name="ifModifiedSince">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
+    /// <param name="ifNoneMatch">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
     /// <param name="date">Filter by a specific date, used as the &#x60;start_date&#x60; and &#x60;end_date&#x60; where applicable (optional)</param>
     /// <param name="yearCode">Filter by school year (optional)</param>
     /// <param name="academicYearId">Include all groups and group memberships from the specified academic year (optional)</param>
@@ -62,6 +63,7 @@ namespace AssemblyClient
     /// <returns>List&lt;YearGroup&gt;</returns>
     public async Task<List<YearGroup>> List(
       DateTime? ifModifiedSince = null, 
+      string ifNoneMatch = null, 
       DateTime? date = null, 
       string yearCode = null, 
       int? academicYearId = null, 
@@ -71,6 +73,7 @@ namespace AssemblyClient
     {
       dynamic args = new ExpandoObject();
       args.ifModifiedSince = ifModifiedSince;
+      args.ifNoneMatch = ifNoneMatch;
       args.date = date;
       args.yearCode = yearCode;
       args.academicYearId = academicYearId;
@@ -88,6 +91,7 @@ namespace AssemblyClient
     /// </remarks>
     /// <param name="id">Internal identifier of the entity</param>
     /// <param name="ifModifiedSince">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
+    /// <param name="ifNoneMatch">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
     /// <param name="date">Filter by a specific date, used as the &#x60;start_date&#x60; and &#x60;end_date&#x60; where applicable (optional)</param>
     /// <param name="demographics">Include demographics data (optional)</param>
     /// <param name="contacts">Include contacts data (optional)</param>
@@ -104,6 +108,7 @@ namespace AssemblyClient
     public async Task<List<Student>> Students(
       int? id, 
       DateTime? ifModifiedSince = null, 
+      string ifNoneMatch = null, 
       DateTime? date = null, 
       bool? demographics = null, 
       bool? contacts = null, 
@@ -120,6 +125,7 @@ namespace AssemblyClient
     {
       dynamic args = new ExpandoObject();
       args.ifModifiedSince = ifModifiedSince;
+      args.ifNoneMatch = ifNoneMatch;
       args.date = date;
       args.demographics = demographics;
       args.contacts = contacts;

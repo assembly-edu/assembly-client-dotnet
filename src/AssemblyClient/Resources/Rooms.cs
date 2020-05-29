@@ -1,6 +1,6 @@
 /**
  * Assembly Developer API .NET Client
- * SDK Version 2.2.463
+ * SDK Version 2.2.464
  * API Version 1.1.0
  *
  * Support
@@ -34,21 +34,18 @@ namespace AssemblyClient
     /// Returns a list of room closures for the school associated with the provided &#x60;access_token&#x60;.
     /// </remarks>
     /// <param name="id">Internal identifier of the entity</param>
-    /// <param name="ifModifiedSince">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
     /// <param name="date">Filter by a specific date, used as the &#x60;start_date&#x60; and &#x60;end_date&#x60; where applicable (optional)</param>
     /// <param name="startDate">The start date of the period to filter by (optional)</param>
     /// <param name="endDate">The end date of the period to filter by (optional)</param>
     /// <returns>List&lt;Closure&gt;</returns>
     public async Task<List<Closure>> Closures(
       int? id, 
-      DateTime? ifModifiedSince = null, 
       DateTime? date = null, 
       DateTime? startDate = null, 
       DateTime? endDate = null
     )
     {
       dynamic args = new ExpandoObject();
-      args.ifModifiedSince = ifModifiedSince;
       args.date = date;
       args.startDate = startDate;
       args.endDate = endDate;
@@ -63,21 +60,18 @@ namespace AssemblyClient
     /// Returns a single room for the school associated with the provided &#x60;access_token&#x60;
     /// </remarks>
     /// <param name="id">Internal identifier of the entity</param>
-    /// <param name="ifModifiedSince">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
     /// <param name="date">Filter by a specific date, used as the &#x60;start_date&#x60; and &#x60;end_date&#x60; where applicable (optional)</param>
     /// <param name="startDate">The start date of the period to filter by (optional)</param>
     /// <param name="endDate">The end date of the period to filter by (optional)</param>
     /// <returns>Room</returns>
     public async Task<Room> Find(
       int? id, 
-      DateTime? ifModifiedSince = null, 
       string date = null, 
       string startDate = null, 
       string endDate = null
     )
     {
       dynamic args = new ExpandoObject();
-      args.ifModifiedSince = ifModifiedSince;
       args.date = date;
       args.startDate = startDate;
       args.endDate = endDate;
@@ -92,7 +86,6 @@ namespace AssemblyClient
     /// Returns a list of lessons in a room for the school associated with the provided &#x60;access_token&#x60;.
     /// </remarks>
     /// <param name="id">Internal identifier of the entity</param>
-    /// <param name="ifModifiedSince">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
     /// <param name="date">Filter by a specific date, used as the &#x60;start_date&#x60; and &#x60;end_date&#x60; where applicable (optional)</param>
     /// <param name="startDate">The start date of the period to filter by (optional)</param>
     /// <param name="endDate">The end date of the period to filter by (optional)</param>
@@ -101,7 +94,6 @@ namespace AssemblyClient
     /// <returns>List&lt;Lesson&gt;</returns>
     public async Task<List<Lesson>> Lessons(
       int? id, 
-      DateTime? ifModifiedSince = null, 
       DateTime? date = null, 
       DateTime? startDate = null, 
       DateTime? endDate = null, 
@@ -110,7 +102,6 @@ namespace AssemblyClient
     )
     {
       dynamic args = new ExpandoObject();
-      args.ifModifiedSince = ifModifiedSince;
       args.date = date;
       args.startDate = startDate;
       args.endDate = endDate;
@@ -127,17 +118,20 @@ namespace AssemblyClient
     /// Returns a list of rooms for the school associated with the provided &#x60;access_token&#x60;.
     /// </remarks>
     /// <param name="ifModifiedSince">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
+    /// <param name="ifNoneMatch">Filter results since it was last fetched (see [Conditional Requests](/#section/Concepts/Conditional-Requests)) (optional)</param>
     /// <param name="perPage">Number of results to return (optional, default to 100)</param>
     /// <param name="page">Page number to return (optional, default to 1)</param>
     /// <returns>List&lt;Room&gt;</returns>
     public async Task<List<Room>> List(
       DateTime? ifModifiedSince = null, 
+      string ifNoneMatch = null, 
       int? perPage = null, 
       int? page = null
     )
     {
       dynamic args = new ExpandoObject();
       args.ifModifiedSince = ifModifiedSince;
+      args.ifNoneMatch = ifNoneMatch;
       args.perPage = perPage;
       args.page = page;
       var results = await Client.GetList<Room>($"/rooms", args);
