@@ -20,40 +20,48 @@ using System.Threading.Tasks;
 
 namespace AssemblyClient
 {
-  public class ExclusionsResource : Resource
+  public class GradeSetsResource : Resource
   {
-    public ExclusionsResource(ApiClient client)
+    public GradeSetsResource(ApiClient client)
       : base(client)
     {
     }
 
     /// <summary>
-    /// List Exclusions
+    /// View a Grade Set
     /// </summary>
     /// <remarks>
-    /// Returns a list of exclusions. *By default, exclusions are returned that occurred during the current academic year.*
+    /// Returns a single grade set for the given ID
     /// </remarks>
-    /// <param name="studentId">Filter to the specified student (optional)</param>
-    /// <param name="startDate">The start date of the period to filter by (optional)</param>
-    /// <param name="endDate">The end date of the period to filter by (optional)</param>
+    /// <param name="id">Internal identifier of the entity</param>
+    /// <returns>GradeSet</returns>
+    public async Task<GradeSet> Find(
+      int? id
+    )
+    {
+      dynamic args = new ExpandoObject();
+      var result = await Client.GetObject<GradeSet>($"/grade_sets/{id}", args);
+      return result;
+    }
+
+    /// <summary>
+    /// List Grade Sets
+    /// </summary>
+    /// <remarks>
+    /// Returns a list of grade sets
+    /// </remarks>
     /// <param name="perPage">Number of results to return (optional, default to 100)</param>
     /// <param name="page">Page number to return (optional, default to 1)</param>
-    /// <returns>List&lt;Exclusion&gt;</returns>
-    public async Task<List<Exclusion>> List(
-      int? studentId = null, 
-      DateTime? startDate = null, 
-      DateTime? endDate = null, 
+    /// <returns>List&lt;GradeSet&gt;</returns>
+    public async Task<List<GradeSet>> List(
       int? perPage = null, 
       int? page = null
     )
     {
       dynamic args = new ExpandoObject();
-      args.studentId = studentId;
-      args.startDate = startDate;
-      args.endDate = endDate;
       args.perPage = perPage;
       args.page = page;
-      var results = await Client.GetList<Exclusion>($"/exclusions", args);
+      var results = await Client.GetList<GradeSet>($"/grade_sets", args);
       return results;
     }
 
@@ -61,6 +69,6 @@ namespace AssemblyClient
 
   public partial class ApiClient
   {
-    public ExclusionsResource Exclusions => new ExclusionsResource(this);
+    public GradeSetsResource GradeSets => new GradeSetsResource(this);
   }
 }

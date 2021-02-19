@@ -1,6 +1,6 @@
 /**
  * Assembly Developer API .NET Client
- * SDK Version 2.2.472
+ * SDK Version 2.2.473
  * API Version 1.1.0
  *
  * Support

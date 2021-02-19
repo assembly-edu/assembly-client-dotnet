@@ -20,40 +20,40 @@ using System.Threading.Tasks;
 
 namespace AssemblyClient
 {
-  public class MedicalConditionsResource : Resource
+  public class AcademicYearsResource : Resource
   {
-    public MedicalConditionsResource(ApiClient client)
+    public AcademicYearsResource(ApiClient client)
       : base(client)
     {
     }
 
     /// <summary>
-    /// View a Medical Condition
+    /// View an Academic Year
     /// </summary>
     /// <remarks>
-    /// Returns a single medical condition for the given ID
+    /// Returns a single academic year for the school associated with the provided &#x60;access_token&#x60;
     /// </remarks>
     /// <param name="id">Internal identifier of the entity</param>
-    /// <returns>MedicalCondition</returns>
-    public async Task<MedicalCondition> Find(
+    /// <returns>AcademicYear</returns>
+    public async Task<AcademicYear> Find(
       int? id
     )
     {
       dynamic args = new ExpandoObject();
-      var result = await Client.GetObject<MedicalCondition>($"/school/medical_conditions/{id}", args);
+      var result = await Client.GetObject<AcademicYear>($"/academic_years/{id}", args);
       return result;
     }
 
     /// <summary>
-    /// List Medical Conditions
+    /// List Academic Years
     /// </summary>
     /// <remarks>
-    /// Returns a list of all the Medical Conditions defined by the school
+    /// Returns a list of academic years for the school associated with the provided &#x60;access_token&#x60;. The dates of these academic years can be used to filter data in other API endpoints
     /// </remarks>
     /// <param name="perPage">Number of results to return (optional, default to 100)</param>
     /// <param name="page">Page number to return (optional, default to 1)</param>
-    /// <returns>List&lt;MedicalCondition&gt;</returns>
-    public async Task<List<MedicalCondition>> List(
+    /// <returns>List&lt;AcademicYear&gt;</returns>
+    public async Task<List<AcademicYear>> List(
       int? perPage = null, 
       int? page = null
     )
@@ -61,7 +61,7 @@ namespace AssemblyClient
       dynamic args = new ExpandoObject();
       args.perPage = perPage;
       args.page = page;
-      var results = await Client.GetList<MedicalCondition>($"/school/medical_conditions", args);
+      var results = await Client.GetList<AcademicYear>($"/academic_years", args);
       return results;
     }
 
@@ -69,6 +69,6 @@ namespace AssemblyClient
 
   public partial class ApiClient
   {
-    public MedicalConditionsResource MedicalConditions => new MedicalConditionsResource(this);
+    public AcademicYearsResource AcademicYears => new AcademicYearsResource(this);
   }
 }
