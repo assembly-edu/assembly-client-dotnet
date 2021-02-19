@@ -1,6 +1,6 @@
 /**
  * Assembly Developer API .NET Client
- * SDK Version 2.2.470
+ * SDK Version 2.2.471
  * API Version 1.1.0
  *
  * Support
@@ -29,11 +29,11 @@ namespace AssemblyClient {
     [JsonProperty("start_date")]
     public string StartDate { get; set; }
 
-    [JsonProperty("sen_need_code")]
-    public string SenNeedCode { get; set; }
+    [JsonProperty("sen_need_type_code")]
+    public string SenNeedTypeCode { get; set; }
 
-    [JsonProperty("sen_need_name")]
-    public string SenNeedName { get; set; }
+    [JsonProperty("sen_need_type_name")]
+    public string SenNeedTypeName { get; set; }
 
     [JsonProperty("sen_broad_need_type_code")]
     public string SenBroadNeedTypeCode { get; set; }
